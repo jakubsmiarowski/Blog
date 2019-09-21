@@ -3,7 +3,8 @@ import { API_URL } from '../config';
 
 // Selectors
 
-// Actions
+export const getPosts = ({ posts }) => posts;
+export const getPostsNumber = ({ posts }) => posts.length;
 
 // Thunk
 
@@ -23,12 +24,17 @@ export const loadPostsRequest = () => {
 };
 
 // action name creator
+
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
-export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
-export const getPosts = ({ posts }) => posts;
+
+// Actions
+
 export const LOAD_POSTS = createActionName('LOAD_POSTS');
 
+// creator actions
+
+export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 
 // Initial State
 
