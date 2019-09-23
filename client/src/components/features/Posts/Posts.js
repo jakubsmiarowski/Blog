@@ -38,7 +38,8 @@ class Posts extends Component {
       <div>
         <Alert variant='info' children='No Posts' />
       </div>
-    )
+      )
+    }
   }
 };
 
