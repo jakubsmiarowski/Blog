@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getSinglePost, getRequest, loadPostsRequest } from '../../../redux/postsRedux';
-import Posts from './Posts';
+import { getSinglePost, getRequest, loadSinglePostRequest } from '../../../redux/postsRedux';
+import SinglePost from './SinglePost';
 
 const mapStateToProps = state => ({
     posts: getSinglePost(state),
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadPosts: () => dispatch(loadPostsRequest()),
+    loadSinglePosts: () => dispatch(loadSinglePostRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePosts);
