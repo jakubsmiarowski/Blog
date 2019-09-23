@@ -1,9 +1,18 @@
 import React from 'react';
+import HtmlBox from '../../common/HtmlBox/HtmlBox'
 
-const SinglePostPage = () => (
-  <div>
-    <h1>Single Post</h1>
-  </div>
-);
+class SinglePostPage extends React.Component {
+
+  render(){
+    return (
+      <div>
+        <h1>Single Post</h1>
+        <HtmlBox>
+
+        </HtmlBox>
+        </div>
+    )
+  }
+};
 
 export default SinglePostPage;
