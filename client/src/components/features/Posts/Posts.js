@@ -49,6 +49,7 @@ Posts.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
     })
   ),
   loadPosts: PropTypes.func.isRequired,

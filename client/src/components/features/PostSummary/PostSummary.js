@@ -13,6 +13,7 @@ const PostSummary = ({ id, title, content }) => (
     <Button variant="primary">
       Read more
     </Button>
+    <p>Author: {author}</p>
   </article>
 );
 
@@ -20,6 +21,7 @@ PostSummary.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.string,
+  author: PropTypes.string,
 };
 
 export default PostSummary;
