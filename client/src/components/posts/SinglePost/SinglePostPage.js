@@ -1,15 +1,10 @@
-import React from 'react';
-import SinglePost from '../../features/SinglePost/SinglePost';
+import React from "react";
+import SinglePost from "../../features/PostSingle/PostSingleContainer";
 
-class SinglePostPage extends React.Component {
-
-  render(){
-    return (
-      <div>
-        <SinglePost />  
-      </div>
-    )
-  }
-};
+const SinglePostPage = () => (
+  <div>
+    <SinglePost />
+  </div>
+);
 
 export default SinglePostPage;
