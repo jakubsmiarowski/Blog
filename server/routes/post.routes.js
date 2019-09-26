@@ -10,4 +10,7 @@ router.route('/posts').get(PostController.getPosts);
 // add posts
 router.route('/posts').post(PostController.addPost);
 
+// get posts by range
+router.route('/posts/range/:startAt/:limit').get(PostController.getPostByRange);
+
 module.exports = router;
