@@ -8,8 +8,9 @@ import Alert from '../../common/Alert/Alert';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPosts } = this.props;
+    const { loadPosts, resetRequest } = this.props;
     loadPosts();
+    resetRequest();
   }
 
   render() {
