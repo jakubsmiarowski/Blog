@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadSinglePosts: () => dispatch(loadSinglePostRequest()),
+    loadPost: (id) => dispatch(loadSinglePostRequest(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePosts);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePost);
