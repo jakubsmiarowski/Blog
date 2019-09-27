@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './Pagination.scss';
 
 class Pagination extends React.Component {
@@ -8,22 +10,29 @@ class Pagination extends React.Component {
         presentPage: this.props.initialPage || 1
     }
 
+    changePage = (newPage) => {
+        const { onPageChange } = this.props;
+        this.setState({ presentPage: newPage });
+        onPageChange(newPage);
+    }
+
     render() {
 
-        const { pages, onPageChange } = this.props;
+        const { pages } = this.props;
         const { presentPage } = this.state;
         const { changePage } = this;
-
-        changePage = (newPage) => {
-            const { onChangePage } = this.props;
-
-            this.setState({ presentPage: newPage });
-            onPageChange(newPage);
-        }
 
         return (
             <div className="pagination">
                 <ul className="pagination__list">
+
+                    {presentPage >= 2 && (
+                        <li className="pagination__list__item">
+                            <FontAwesomeIcon
+                            icon={faChevronLeft}
+                            />
+                        </li>
+                    )}
 
                     {[...Array(pages)].map((el, page) =>
                     <li
@@ -33,6 +42,15 @@ class Pagination extends React.Component {
                     {page}
                     </li>
                     )}
+
+                    {presentPage !== pages && (
+                        <li className="pagination__list__item">
+                            <FontAwesomeIcon
+                            icon={faChevronRight}
+                            />
+                        </li>
+                    )}
+
                 </ul>
             </div>
         );
