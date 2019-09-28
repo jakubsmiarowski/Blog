@@ -8,20 +8,18 @@ import Pagination from '../../common/Pagination/Pagination';
 
 class Posts extends React.Component {
 
-  loadPostsPage = (page) => {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(page);
+  componentDidMount() {
+    const { loadPostsByPage, postsPerPage, initialPage } = this.props;
+    loadPostsByPage(initialPage || 1, postsPerPage);
   }
 
-  componentDidMount() {
-    const { loadPosts, resetRequest, loadPostsByPage } = this.props;
-    loadPosts();
-    resetRequest();
-    loadPostsByPage(1);
+  loadPostsPage = (page) => {
+    const { loadPostsByPage, postsPerPage } = this.props;
+    loadPostsByPage(page, postsPerPage);
   }
 
   render() {
-    const {posts, request, pages} = this.props;
+    const {posts, request, pages, pagination, presentPage} = this.props;
     const { loadPostsPage } = this;
 
     const textin =  request.pending ? ( 
@@ -30,7 +28,7 @@ class Posts extends React.Component {
          posts.length > 0 ? (
           <div>
             <PostsList posts={posts} />
-            <Pagination pages={pages} onPageChange={loadPostsPage} />
+            {pagination && <Pagination pages={pages} initialPage={presentPage} onPageChange={loadPostsPage} />}
           </div>
       ) : ( 
         <Alert variant="info"> No posts!!! </Alert>
@@ -55,7 +53,7 @@ Posts.propTypes = {
       pages: PropTypes.number.isRequired,
     })
   ),
-  loadPosts: PropTypes.func.isRequired,
+  loadPostsByPage: PropTypes.func.isRequired,
 };
 
 export default Posts;
