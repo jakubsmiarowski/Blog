@@ -86,6 +86,7 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
 
         dispatch(startRequest());
         try {
+            const postsPerPage = 10;
             const startAt = (page - 1) * postsPerPage;
             const limit = postsPerPage;
 
@@ -137,7 +138,7 @@ export default function reducer(statePart = initialState, action = {}) {
         case LOAD_SINGLE_POST:
             return {...statePart, singlePost: action.payload };
         case RESET_REQUEST:
-            return {...statePart, request: initialState.request };
+            return {...statePart, request: { pending: false, error: null, success: null } };
         case LOAD_POSTS_PAGE:
             return {
                 ...statePart,
