@@ -11,9 +11,9 @@ class Pagination extends React.Component {
     }
 
     changePage = (newPage) => {
-        const { onPageChange } = this.props;
+        const { onPageChange, perPage } = this.props;
         this.setState({ presentPage: newPage });
-        onPageChange(newPage);
+        onPageChange(newPage, perPage);
     }
 
     render() {
@@ -22,17 +22,33 @@ class Pagination extends React.Component {
         const { presentPage } = this.state;
         const { changePage } = this;
 
+        let prevLink = '';
+        if(presentPage > 1) {
+            prevLink = <li
+                key="0"
+                onClick={() => {changePage(presentPage-1) }}
+                className="pagination__list__item">
+                    <FontAwesomeIcon
+                    icon={faChevronLeft} />
+                </li>
+        }
+
+        let nextLink = '';
+        if(presentPage < pages) {
+            nextLink = <li
+                key={pages}
+                onClick={() => {changePage(presentPage+1) }}
+                className="pagination__lit__item">
+                    <FontAwesomeIcon
+                    icon={faChevronRight} />
+                </li>
+        }
+
         return (
             <div className="pagination">
                 <ul className="pagination__list">
 
-                    {presentPage >= 2 && (
-                        <li className="pagination__list__item">
-                            <FontAwesomeIcon
-                            icon={faChevronLeft}
-                            />
-                        </li>
-                    )}
+                    {prevLink}
 
                     {[...Array(pages)].map((el, page) =>
                     <li
@@ -43,13 +59,7 @@ class Pagination extends React.Component {
                     </li>
                     )}
 
-                    {presentPage !== pages && (
-                        <li className="pagination__list__item">
-                            <FontAwesomeIcon
-                            icon={faChevronRight}
-                            />
-                        </li>
-                    )}
+                    {nextLink}
 
                 </ul>
             </div>
@@ -61,6 +71,7 @@ Pagination.propTypes = {
     pages: PropTypes.number.isRequired,
     initialPage: PropTypes.number,
     onPageChange: PropTypes.func.isRequired,
+    perPage: PropTypes.number
 };
 
 export default Pagination;
