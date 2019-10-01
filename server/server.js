@@ -6,10 +6,12 @@ const loadTestData = require('./testData');
 const helmet = require('helmet');
 
 const app = express();
+const mongoSanitize = require('express-mongo-sanitize');
 
 // import routes
 const postRoutes = require('./routes/post.routes');
 
+app.use(mongoSanitize());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

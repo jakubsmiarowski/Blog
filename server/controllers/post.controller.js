@@ -1,7 +1,6 @@
 const Post = require('../models/post.model');
 const uuid = require('uuid');
 
-// get all posts
 
 exports.getPosts = async(req, res) => {
 
@@ -12,7 +11,17 @@ exports.getPosts = async(req, res) => {
     }
 };
 
-// add new post
+exports.getPost = async(req, res) => {
+    try {
+        res.status(200).json(await Post.findById(req.params.id));
+
+    } catch (error) {
+        res.status(500).json({
+            'status': 'fail',
+            'messages': error //On production should be Invalid data send
+        });
+    }
+};
 
 exports.addPost = async function(req, res) {
 
@@ -29,7 +38,6 @@ exports.addPost = async function(req, res) {
     }
 }
 
-// get posts by range
 exports.getPostsByRange = async function(req, res) {
 
     try {
