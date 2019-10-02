@@ -1,10 +1,12 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { withRouter } from "react-router-dom";
+import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
 import Spinner from "../../common/Spinner/Spinner";
 import Alert from "../../common/Alert/Alert";
 import HtmlBox from "../../common/HtmlBox/HtmlBox";
 import SmallTitle from "../../common/SmallTitle/SmallTitle";
+import { BASE_URL } from '../../../config.js';
 
 class PostSingle extends React.Component {
   componentDidMount() {
@@ -14,7 +16,7 @@ class PostSingle extends React.Component {
   }
 
   render() {
-    const { posts, request } = this.props;
+    const { posts, request, location } = this.props;
     const textin = request.pending ? (
       <Spinner />
     ) : request.success ? (
@@ -22,6 +24,13 @@ class PostSingle extends React.Component {
         <article className="post-summary">
           <SmallTitle>{posts.title}</SmallTitle>
           <HtmlBox>{posts.content}</HtmlBox>
+          <FacebookProvider appId="524677441696598">
+            <ShareButton href={`${BASE_URL}${location.pathname}`}>
+              Share
+            </ShareButton>
+            <p>Author: {posts.author}</p>
+            <Comments href={`${BASE_URL}${location.pathname}`} />
+          </FacebookProvider>
         </article>
       ) : (
         <Alert variant="info"> No posts!!! </Alert>
