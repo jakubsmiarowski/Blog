@@ -39,16 +39,15 @@ export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
 
 export const loadSinglePostRequest = (id) => {
     return async dispatch => {
-
+        dispatch(startRequest());
         try {
-            let res = await axios.get(`${API_URL}/posts`);
+            let res = await axios.get(`${API_URL}/posts/${id}`);
             dispatch(loadSinglePost(res.data));
             dispatch(endRequest());
 
         } catch (e) {
             dispatch(errorRequest(e.message));
         }
-
     };
 };
 
