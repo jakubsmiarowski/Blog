@@ -13,13 +13,12 @@ exports.getPosts = async(req, res) => {
 
 exports.getPost = async(req, res) => {
     try {
-        res.status(200).json(await Post.findById(req.params.id));
-
-    } catch (error) {
-        res.status(500).json({
-            'status': 'fail',
-            'messages': error //On production should be Invalid data send
+        const post = await Post.findOne({
+            id: req.params.id
         });
+        res.status(200).json(post);
+    } catch (err) {
+        res.status(500).json(err);
     }
 };
 
