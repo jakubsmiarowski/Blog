@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadPost: (id) => dispatch(loadSinglePostRequest(id)),
+    resetRequest: () => dispatch(resetRequest())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostSingle);
