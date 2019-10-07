@@ -4,6 +4,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
+const path = require('path');
 
 const app = express();
 const mongoSanitize = require('express-mongo-sanitize');
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api', postRoutes);
 app.use(helmet());
+app.use(express.static(path.join(__dirname, '/../client/build')));
 
 // connects our back end code with the database
 mongoose.connect(config.DB, { useNewUrlParser: true });
@@ -30,4 +32,8 @@ db.on('error', (err) => console.log('Error ' + err));
 
 app.listen(config.PORT, function() {
     console.log('Server is running on Port:', config.PORT);
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });

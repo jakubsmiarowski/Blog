@@ -11,7 +11,6 @@ class PostCounter extends React.Component {
             {posts > 0 ? 'Posts amount: ' + posts : ' No posts '}
             </div>
         )
-        console.log(PostCounter)
     }
 }
 PostCounter.propTypes = {
