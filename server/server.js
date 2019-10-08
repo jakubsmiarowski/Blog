@@ -21,7 +21,7 @@ app.use(helmet());
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
 // connects our back end code with the database
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(process.env.DB, { useNewUrlParser: true });
 let db = mongoose.connection;
 
 db.once('open', () => {
@@ -30,8 +30,8 @@ db.once('open', () => {
 });
 db.on('error', (err) => console.log('Error ' + err));
 
-app.listen(config.PORT, function() {
-    console.log('Server is running on Port:', config.PORT);
+app.listen(process.env.PORT, function() {
+    console.log('Server is running on Port:', process.env.PORT);
 });
 
 app.get('*', (req, res) => {
