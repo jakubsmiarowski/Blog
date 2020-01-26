@@ -13,10 +13,7 @@ exports.getPosts = async(req, res) => {
 
 exports.getPost = async(req, res) => {
     try {
-        const post = await Post.findOne({
-            id: req.params.id
-        });
-        res.status(200).json(post);
+        res.status(200).json(await Post.findOne({ id: req.params.id }));
     } catch (err) {
         res.status(500).json(err);
     }
@@ -26,7 +23,7 @@ exports.addPost = async function(req, res) {
 
     try {
         const { title, author, content } = req.body;
-
+        const sanitizeBody = (req.body)
         let newPost = new Post(req.body);
         newPost.id = uuid();
 
